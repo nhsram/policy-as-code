@@ -17,7 +17,6 @@ param listOfAllowedSKUs array = [
   'Standard_B4ms'
   'Standard_B4s'
   'Standard_D2s_v3'
-  'Standard_D4s_v3'
 ]
 
 // VARIABLES
