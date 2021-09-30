@@ -9,14 +9,15 @@ variables:
   subscription: '09571fdf-86af-4c4f-809c-6e3a1ae77d9e'
 
 pool:
-  vmImage: $(vmImageName)  
-      steps:
-        - task: AzureCLI@2
-        inputs:
-          targetScope: Subscription
-          azureSubscription: $(azureServiceConnection)          
-          scriptType: bash
-          scriptLocation: inlineScript
-          inlineScript: |
-            az --version        
-            az deployment sub create --name $(Build.BuildNumber) --location $(location) --template-file $(templateFile)              
+  vmImage: $(vmImageName)
+
+steps:
+- task: AzureCLI@2
+  inputs:
+    targetScope: Subscription
+    azureSubscription: $(azureServiceConnection)          
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      az --version
+      az deployment sub create --name $(Build.BuildNumber) --location $(location) --template-file $(templateFile)
