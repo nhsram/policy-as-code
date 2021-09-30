@@ -14,13 +14,9 @@ pool:
       - task: AzureCLI@2
         inputs:
           targetScope: Subscription
-    azureSubscription: $(azureServiceConnection)
-    workingDirectory: 
-    scriptType: bash
-    scriptLocation: inlineScript
-    inlineScript: |
-            az deployment sub create \
-              --name $(Build.BuildNumber) \
-              --f $(templateFile) \
-              --l $(location) \            
-              --template-file $(templateFile) \            
+          azureSubscription: $(azureServiceConnection)          
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+            az --version        
+            az deployment sub create --name $(Build.BuildNumber) --location $(location) --template-file $(templateFile)              
