@@ -3,6 +3,12 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
+
+  variables:
+    ServiceConnectionName: 'serviceconnection-iac-devops-test'
+    EnvironmentType: 'Test'
+    ResourceGroupName: 'testRG'
+
   stages:
     - stage: Deploy
   jobs:
@@ -11,6 +17,7 @@ pool:
       - task: AzureCLI@2
         inputs:
           azureSubscription: serviceconnection-iac-devops-test
+          resourceGroupName: 'testrg'
           scriptType: 'bash'
           scriptLocation: 'inlineScript'
           inlineScript: |
@@ -18,3 +25,4 @@ pool:
               --name $(Build.BuildNumber) \
               --resource-group testrg \
               --template-file Bicep/learn/Level1/main.bicep \
+            
