@@ -1,5 +1,5 @@
 trigger:
-- master
+- main
 
 variables:
   vmImageName: 'ubuntu-latest'    
@@ -10,8 +10,8 @@ variables:
 
 pool:
   vmImage: $(vmImageName)  
-      steps:      
-      - task: AzureCLI@2
+      steps:
+        - task: AzureCLI@2
         inputs:
           targetScope: Subscription
           azureSubscription: $(azureServiceConnection)          
