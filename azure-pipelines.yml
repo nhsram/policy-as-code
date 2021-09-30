@@ -5,16 +5,15 @@ pool:
   vmImage: ubuntu-latest
   jobs:
     - job:
-      steps:
-      
+      steps:      
       - task: AzureCLI@2
         inputs:
-          azureSubscription: $(ServiceConnectionName)
+          azureSubscription: serviceconnection-iac-devops-test
           scriptType: 'bash'
           scriptLocation: 'inlineScript'
           inlineScript: |
             az deployment group create \
               --name $(Build.BuildNumber) \
-              --resource-group $(ResourceGroupName) \
-              --template-file deploy/main.bicep \
+              --resource-group testrg \
+              --template-file Bicep/learn/Level1/main.bicep \
               --parameters environmentType=$(EnvironmentType) deployToyManualsStorageAccount=$(DeployToyManualsStorageAccount)
