@@ -5,6 +5,8 @@ pool:
   vmImage: ubuntu-latest
   jobs:
     - job:
+      stages:
+        - stage: Deploy
       steps:      
       - task: AzureCLI@2
         inputs:
