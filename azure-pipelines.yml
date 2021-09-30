@@ -16,4 +16,3 @@ pool:
               --name $(Build.BuildNumber) \
               --resource-group testrg \
               --template-file Bicep/learn/Level1/main.bicep \
-              --parameters environmentType=$(EnvironmentType) deployToyManualsStorageAccount=$(DeployToyManualsStorageAccount)
