@@ -1,28 +1,26 @@
 trigger:
 - main
 
+variables:
+  vmImageName: 'ubuntu-latest'    
+  azureServiceConnection: 'serviceconnection-iac-devops-test'    
+  location: 'northeurope'    
+  templateFile: './Bicep/learn/Level1/main.bicep'    
+  subscription: '09571fdf-86af-4c4f-809c-6e3a1ae77d9e'
+
 pool:
-  vmImage: ubuntu-latest
-
-  variables:
-    ServiceConnectionName: 'serviceconnection-iac-devops-test'
-    EnvironmentType: 'Test'
-    ResourceGroupName: 'testRG'
-
-  stages:
-    - stage: Deploy
-  jobs:
-    - job:      
+  vmImage: $(vmImageName)  
       steps:      
       - task: AzureCLI@2
         inputs:
-          azureSubscription: serviceconnection-iac-devops-test
-          resourceGroupName: 'testrg'
-          scriptType: 'bash'
-          scriptLocation: 'inlineScript'
-          inlineScript: |
-            az deployment group create \
+          targetScope: Subscription
+    azureSubscription: $(azureServiceConnection)
+    workingDirectory: 
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+            az deployment sub create \
               --name $(Build.BuildNumber) \
-              --resource-group testrg \
-              --template-file Bicep/learn/Level1/main.bicep \
-            
+              --f $(templateFile) \
+              --l $(location) \            
+              --template-file $(templateFile) \            
